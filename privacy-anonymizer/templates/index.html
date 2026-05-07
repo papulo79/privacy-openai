@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anonimizador de Documentos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Anonimizador de Documentos</h1>
+            <p class="subtitle">Elimina o transforma información personal de tus documentos de forma segura</p>
+        </header>
+
+        <main>
+            <div class="privacy-banner">
+                <span class="shield-icon">&#128274;</span>
+                <p><strong>Privacidad garantizada:</strong> Los documentos se procesan <em>únicamente en memoria</em>. Nunca se almacenan en el servidor.</p>
+            </div>
+
+            <div class="transformer-section">
+                <label for="transformerSelect" class="transformer-label">Modo de anonimización:</label>
+                <select id="transformerSelect" class="transformer-select">
+                    <option value="redacted" selected>
+                        &#128683; Redactado completo — reemplaza todo por &lt;REDACTED&gt;
+                    </option>
+                    <option value="initials">
+                        &#128100; Iniciales — Alice Johnson &rarr; A.J.
+                    </option>
+                    <option value="partial">
+                        &#128065; Máscara parcial — A**** J******* / 555-***-4567
+                    </option>
+                    <option value="hash">
+                        &#35; Hash — identificador único consistente
+                    </option>
+                </select>
+                <p class="transformer-help" id="transformerHelp">
+                    Reemplaza toda la información personal detectada por &lt;REDACTED&gt;.
+                </p>
+            </div>
+
+            <div class="upload-area" id="uploadArea">
+                <div class="upload-content">
+                    <div class="upload-icon">&#128194;</div>
+                    <p class="upload-text">Arrastra y suelta tu archivo aquí</p>
+                    <p class="upload-or">o</p>
+                    <button type="button" class="btn-select" id="btnSelect">Seleccionar archivo</button>
+                    <input type="file" id="fileInput" accept=".docx,.xlsx,.pptx,.txt" hidden>
+                </div>
+            </div>
+
+            <div class="file-info" id="fileInfo" style="display: none;">
+                <div class="file-details">
+                    <span class="file-icon" id="fileIcon">&#128196;</span>
+                    <div class="file-meta">
+                        <span class="file-name" id="fileName"></span>
+                        <span class="file-size" id="fileSize"></span>
+                    </div>
+                </div>
+                <button type="button" class="btn-remove" id="btnRemove" title="Eliminar">&times;</button>
+            </div>
+
+            <button type="button" class="btn-anonymize" id="btnAnonymize" disabled>
+                <span class="btn-text">Anonimizar y descargar</span>
+                <span class="spinner" id="spinner" style="display: none;"></span>
+            </button>
+
+            <div class="result-area" id="resultArea" style="display: none;">
+                <div class="result-success">
+                    <span class="success-icon">&#9989;</span>
+                    <p>¡Documento anonimizado con éxito!</p>
+                    <p class="result-filename" id="resultFilename"></p>
+                </div>
+            </div>
+
+            <div class="error-area" id="errorArea" style="display: none;">
+                <div class="result-error">
+                    <span class="error-icon">&#10060;</span>
+                    <p id="errorMessage"></p>
+                </div>
+            </div>
+
+            <div class="supported-formats">
+                <h3>Formatos soportados</h3>
+                <div class="format-list">
+                    <div class="format-item">
+                        <span class="format-icon">&#128221;</span>
+                        <span>Word (.docx)</span>
+                    </div>
+                    <div class="format-item">
+                        <span class="format-icon">&#128202;</span>
+                        <span>Excel (.xlsx)</span>
+                    </div>
+                    <div class="format-item">
+                        <span class="format-icon">&#128187;</span>
+                        <span>PowerPoint (.pptx)</span>
+                    </div>
+                    <div class="format-item">
+                        <span class="format-icon">&#128196;</span>
+                        <span>Texto plano (.txt)</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Powered by <a href="https://github.com/openai/privacy-filter" target="_blank">OpenAI Privacy Filter</a></p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
