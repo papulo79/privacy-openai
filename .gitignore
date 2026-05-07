@@ -46,3 +46,10 @@ Thumbs.db
 # Temporary files
 /tmp/
 *.tmp
+
+# Systemd service files (may contain sensitive system-specific info)
+systemd/
+
+# Python cache
+__pycache__/
+*.pyc
